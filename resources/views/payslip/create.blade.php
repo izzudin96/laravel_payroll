@@ -5,7 +5,17 @@
 <div class="container">
     <div class="row">
         <div class="col-md-offset-3 col-md-7">
-
+            
+            {{-- Error Box --}}
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
             {{-- Panel Start --}}
             <div class="panel panel-default">
 

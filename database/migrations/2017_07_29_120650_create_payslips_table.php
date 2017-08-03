@@ -21,14 +21,14 @@ class CreatePayslipsTable extends Migration
 
             //allowance
             $table->integer('generalAllowance');
+            $table->integer('overtime');
             $table->integer('claims');
             $table->integer('bonus');
-            $table->integer('overtime');
             
             //deduction
             $table->integer('epfDeductionPercentage');
             $table->integer('socsoDeduction');
-            $table->integer('taxDeductionPercentage');
+            $table->integer('taxDeduction');
             $table->integer('zakat');
 
             //company contributions
