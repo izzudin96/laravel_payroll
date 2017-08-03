@@ -15,7 +15,7 @@ class CreatePayslipsTable extends Migration
     {
         Schema::create('payslips', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unique();
+            $table->integer('user_id');
             $table->string('month');
             $table->integer('year');
 
@@ -27,6 +27,7 @@ class CreatePayslipsTable extends Migration
             
             //deduction
             $table->integer('epfDeductionPercentage');
+            $table->integer('epfDeduction');
             $table->integer('socsoDeduction');
             $table->integer('taxDeduction');
             $table->integer('zakat');

@@ -44,10 +44,11 @@ class PayslipsController extends Controller
 
 
         // Calculate Total Additions
-        $additions = $user->fixedSalary + $request->generalAllowance + $request->overtime + $request->claims + $request->bonus;
+        $salaryAndAllowance = $user->fixedSalary + $request->generalAllowance;
+        $additions = $salaryAndAllowance + $request->overtime + $request->claims + $request->bonus;
 
         // Calculate EPF Deduction based on Percentage
-        $epfDeduction = ($additions * $request->epfDeductionPercentage) / 100;
+        $epfDeduction = ($salaryAndAllowance * $request->epfDeductionPercentage) / 100;
 
         // Calculate Socso Deduction
         if($user->fixedSalary > 0 && $user->fixedSalary < 1001)
@@ -119,11 +120,42 @@ class PayslipsController extends Controller
         $netPay = $additions - $deduction;
 
         //Company EPF Contribution
-        $companyEpfContribution = ($additions * ($request->epfDeductionPercentage + 2)) / 100;
+        $companyEpfContribution = ($salaryAndAllowance * ($request->epfDeductionPercentage + 2)) / 100;
 
+        $payslip = Payslip::create([
+            'user_id' => $request->user_id,
+            'month' => $request->month,
+            'year' => $request->year,
 
-        
+            //allowance
+            'generalAllowance' => $request->generalAllowance,
+            'overtime' => $request->overtime,
+            'claims' => $request->claims,
+            'bonus' => $request->bonus,
 
-        return redirect('/payslip');
+            //deduction
+            'epfDeductionPercentage' => $request->epfDeductionPercentage,
+            'epfDeduction' => $epfDeduction,
+            'socsoDeduction' => $socsoDeduction,
+            'taxDeduction' => $taxDeduction,
+            'zakat' => $request->zakat,
+
+            //company contribution
+            'companyEpfContribution' => $companyEpfContribution,
+            'companySocsoContribution' => $companySocsoContribution,
+
+            //summary
+            'netPay' => $netPay,
+
+            //status
+            'isVerified' => 0,
+        ]);
+
+        return redirect("/payslip/$payslip->id");
+    }
+
+    public function show(Payslip $payslip)
+    {
+        return view('payslip.show', compact('payslip'));
     }
 }

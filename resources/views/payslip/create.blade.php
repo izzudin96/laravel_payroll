@@ -48,7 +48,7 @@
                             <div class="col-md-6">
                                 <select name="month" class="form-control" required>
                                     <option disabled>Select a month</option>
-                                    <option value="{{ date("M") }}">{{ date("F") }}</option>
+                                    <option value="{{ date("F") }}">{{ date("F") }}</option>
                                     <option value="January">January</option>
                                     <option value="February">February</option>
                                     <option value="March">March</option>
