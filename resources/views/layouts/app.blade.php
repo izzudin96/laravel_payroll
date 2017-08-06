@@ -35,51 +35,96 @@
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
+                    @if(!Auth::guest())
                     <ul class="nav navbar-nav">
-                        <li>
-                            <a href="/payslip/create">Generate Payslip</a>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                Payslip <span class="caret"></span>
+                            </a>
+                            
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="/payslip">My Payslips</a>
+                                </li>
+                                @if(Auth::user()->role > 1)
+                                    <li>
+                                        <a href="/payslip/all">Others Payslips</a>
+                                    </li>
+
+                                    <li>
+                                        <li>
+                                            <a href="/payslip/create">Generate Payslip</a>
+                                        </li>
+                                    </li>
+                                @endif
+                            </ul>
+                            @endif
                         </li>
+
+                        @if(Auth::user()->role > 1)
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    Users <span class="caret"></span>
+                                </a>
+                                
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="/users">All users</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                        <li><a href="{{ route('login') }}">Login</a></li>
+                        <li><a href="{{ route('register') }}">Register</a></li>
                         @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="/profile/">Profile</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                    Logout
                                 </a>
 
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="/profile/">Profile</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
                             </li>
-                        @endif
-                    </ul>
-                </div>
+                        </ul>
+                    </li>
+                    @endif
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        @yield('content')
+    @yield('content')
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-5">
+                ©izzudinanuar.com 2017.
+            </div>
+        </div>
     </div>
+</div>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

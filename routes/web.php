@@ -12,13 +12,14 @@
 */
 
 Route::get('/', function () {
-    return redirect('/login');
+    return redirect('/profile');
 });
 
 Route::get('/profile', 'ProfileController@index');
 Route::get('/profile/edit', 'ProfileController@edit');
 Route::patch('/profile', 'ProfileController@update');
 
+Route::get('/payslip/all', 'PayslipsController@all');
 Route::resource('/payslip', 'PayslipsController');
 
 Route::resource('/users', 'UsersController');

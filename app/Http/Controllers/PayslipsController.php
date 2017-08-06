@@ -2,17 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\User;
 use App\Payslip;
 use Illuminate\Http\Request;
 
 class PayslipsController extends Controller
 {
-    protected $guarded = [];
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('manager')->only('all', 'create', 'store', 'destroy');
+    }
 
     public function index()
     {
-        $payslips = Payslip::all();
+        $payslips = Payslip::where('user_id', Auth::user()->id)->get();
+
+        return  view('payslip.index', compact('payslips'));
+    }
+
+    public function all()
+    {
+        $payslips = Payslip::latest()->get();
 
         return  view('payslip.index', compact('payslips'));
     }
@@ -26,9 +38,6 @@ class PayslipsController extends Controller
 
     public function store(Request $request)
     {
-        //Find user
-        $user = User::findOrFail($request->user_id);
-
         //Validate Form
         $this->validate($request, [
             'user_id' => 'required|integer',
@@ -42,6 +51,8 @@ class PayslipsController extends Controller
             'zakat' => 'required|numeric'
         ]);
 
+        //Find user
+        $user = User::findOrFail($request->user_id);
 
         // Calculate Total Additions
         $salaryAndAllowance = $user->fixedSalary + $request->generalAllowance;

@@ -112,15 +112,17 @@
                     </div>
                     
                     {{-- Delete Payslip --}}
-                    <div class="row">
-                        <div class="col-md-offset-1">
-                            <form role="form" method="POST" action="/payslip/{{ $payslip->id }}">
-                                {{ csrf_field() }} {{ method_field("DELETE") }}
-                                <button type="submit" class="btn btn-link">
-                                    Delete Payslip
-                                </button>
-                            </form>
-                        </div>
+                    @if(Auth::user()->role > 1)
+                        <div class="row">
+                            <div class="col-md-offset-1">
+                                <form role="form" method="POST" action="/payslip/{{ $payslip->id }}">
+                                    {{ csrf_field() }} {{ method_field("DELETE") }}
+                                    <button type="submit" class="btn btn-link">
+                                        Delete Payslip
+                                    </button>
+                                </form>
+                            </div>
+                        @endif
                         
                     </div>
                 </div>

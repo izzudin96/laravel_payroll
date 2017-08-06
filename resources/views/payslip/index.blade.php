@@ -3,12 +3,17 @@
 @section('content')
 
 <div class="container">
+    {{-- Messages --}}
+    <div class="col-md-offset-2">
+        @if($payslips->count() == 0)
+            There is no payslip recorded.
+        @endif
+    </div>
     {{-- Personal Details --}}
     @foreach($payslips as $payslip)
     <div class="row">
         <div class="col-md-offset-2 col-md-8">
             <div class="panel panel-default">
-
                 <div class="panel-heading">
                     Payslip #{{ $payslip->id }} | <a href="/payslip/{{ $payslip->id }}">View</a>
                 </div>
