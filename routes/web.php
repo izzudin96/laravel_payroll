@@ -21,6 +21,8 @@ Route::patch('/profile', 'ProfileController@update');
 
 Route::resource('/payslip', 'PayslipsController');
 
+Route::resource('/users', 'UsersController');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

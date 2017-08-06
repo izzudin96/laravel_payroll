@@ -20,24 +20,30 @@ class CreatePayslipsTable extends Migration
             $table->integer('year');
 
             //allowance
-            $table->integer('generalAllowance');
-            $table->integer('overtime');
-            $table->integer('claims');
-            $table->integer('bonus');
+            $table->double('generalAllowance');
+            $table->double('overtime');
+            $table->double('claims');
+            $table->double('bonus');
+
+            //Total Additions
+            $table->double('totalAdditions');
             
             //deduction
-            $table->integer('epfDeductionPercentage');
-            $table->integer('epfDeduction');
-            $table->integer('socsoDeduction');
-            $table->integer('taxDeduction');
-            $table->integer('zakat');
+            $table->double('epfDeductionPercentage');
+            $table->double('epfDeduction');
+            $table->double('socsoDeduction');
+            $table->double('taxDeduction');
+            $table->double('zakat');
+
+            //Total Deduction
+            $table->double('totalDeductions');
 
             //company contributions
-            $table->integer('companyEpfContribution');
-            $table->integer('companySocsoContribution');
+            $table->double('companyEpfContribution');
+            $table->double('companySocsoContribution');
 
             //summary
-            $table->integer('netPay')->nullable();
+            $table->double('netPay')->nullable();
 
             //status
             $table->integer('isVerified')->default(0);

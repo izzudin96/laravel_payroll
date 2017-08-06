@@ -11,7 +11,7 @@
                     Personal Details
                 </div>
                 
-                <form class="form-horizontal" role="form" method="POST" action="/profile">
+                <form class="form-horizontal" role="form" method="POST" action="/users/{{ $user->id }}">
                     {{ csrf_field() }} {{ method_field("PATCH") }}
                     <div class="panel-body">
                         <div class="form-group">
@@ -52,7 +52,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label">Birthday</label>
                             <div class="col-md-6">
-                            <input type="text" class="form-control" name="birthday" value="{{ $user->birthday }}" required>
+                            <input type="text" class="form-control" name="birthday" value="{{ $user->birthday }}" placeholder="yyyy-mm-dd hh:mm:ss" required>
                             </div>
                         </div>
 
@@ -62,6 +62,62 @@
                             <input type="text" class="form-control" name="icNumber" value="{{ $user->icNumber }}" required>
                             </div>
                         </div>
+
+                        <hr>
+                        {{-- Employement Details --}}
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Employee No</label>
+                            <div class="col-md-6">
+                            <input type="text" class="form-control" name="employeeNo" value="{{ $user->employeeNo }}" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Start Date</label>
+                            <div class="col-md-6">
+                            <input type="text" class="form-control" name="startDate" value="{{ $user->startDate }}" placeholder="yyyy-mm-dd hh:mm:ss" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Position</label>
+                            <div class="col-md-6">
+                            <input type="text" class="form-control" name="position" value="{{ $user->position }}" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Department</label>
+                            <div class="col-md-6">
+                            <input type="text" class="form-control" name="department" value="{{ $user->department }}" required>
+                            </div>
+                        </div>
+                        
+                        <hr>
+                        {{-- Compensation Details --}}
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Fixed Salary</label>
+                            <div class="col-md-6">
+                            <input type="text" class="form-control" name="fixedSalary" value="{{ $user->fixedSalary }}" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Bank Name</label>
+                            <div class="col-md-6">
+                            <input type="text" class="form-control" name="bankName" value="{{ $user->bankName }}" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Bank Account Number</label>
+                            <div class="col-md-6">
+                            <input type="text" class="form-control" name="bankAccountNumber" value="{{ $user->bankAccountNumber }}" required>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="form-group">

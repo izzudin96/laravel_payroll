@@ -36,7 +36,7 @@ class CreateUsersTable extends Migration
             $table->string('department')->nullable();
 
             //compensation
-            $table->integer('fixedSalary')->default(1000);
+            $table->double('fixedSalary')->default(1000);
             $table->string('bankName')->nullable();
             $table->string('bankAccountNumber')->nullable();
 

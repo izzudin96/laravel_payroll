@@ -28,7 +28,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'icNumber' => $faker->randomDigit(10),
 
         //employment info
-        'employeeNo' => $faker->unique()->randomDigit(10),
+        'employeeNo' => $faker->randomDigit(1000),
         'startDate' => $faker->date($format = 'Y-m-d', $max = 'now'),
         'position' => $faker->jobTitle,
         'department' => 'Marketing Department',

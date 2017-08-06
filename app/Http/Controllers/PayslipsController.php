@@ -114,10 +114,10 @@ class PayslipsController extends Controller
         }
 
         //Calculate Total Deduction
-        $deduction = $epfDeduction + $socsoDeduction + $taxDeduction + $request->zakat;
+        $deductions = $epfDeduction + $socsoDeduction + $taxDeduction + $request->zakat;
 
         //Net Pay
-        $netPay = $additions - $deduction;
+        $netPay = $additions - $deductions;
 
         //Company EPF Contribution
         $companyEpfContribution = ($salaryAndAllowance * ($request->epfDeductionPercentage + 2)) / 100;
@@ -133,12 +133,18 @@ class PayslipsController extends Controller
             'claims' => $request->claims,
             'bonus' => $request->bonus,
 
+            //total Additions
+            'totalAdditions' => $additions,
+
             //deduction
             'epfDeductionPercentage' => $request->epfDeductionPercentage,
             'epfDeduction' => $epfDeduction,
             'socsoDeduction' => $socsoDeduction,
             'taxDeduction' => $taxDeduction,
             'zakat' => $request->zakat,
+
+            //total Deduction
+            'totalDeductions' => $deductions,
 
             //company contribution
             'companyEpfContribution' => $companyEpfContribution,
@@ -157,5 +163,12 @@ class PayslipsController extends Controller
     public function show(Payslip $payslip)
     {
         return view('payslip.show', compact('payslip'));
+    }
+
+    public function destroy(Payslip $payslip)
+    {
+        $payslip->delete();
+
+        return redirect('payslip');
     }
 }
